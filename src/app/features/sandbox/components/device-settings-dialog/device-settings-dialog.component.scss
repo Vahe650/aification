@@ -1,0 +1,23 @@
+mat-dialog-content {
+  min-width: 400px;
+  padding: 24px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.half-width {
+  width: calc(50% - 8px);
+  display: inline-block;
+  margin-right: 16px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.threshold-group {
+  margin-bottom: 16px;
+}

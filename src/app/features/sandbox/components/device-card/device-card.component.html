@@ -1,0 +1,33 @@
+<div 
+  class="device-card" 
+  cdkDrag
+  [style.left.px]="currentPosition.x"
+  [style.top.px]="currentPosition.y"
+  cdkDragBoundary=".workspace-content"
+  (cdkDragEnded)="onDragEnded($event)"
+  (cdkDragMoved)="onDragMoved($event)"
+  [class.active]="device.isActive"
+>
+  <div class="device-header" cdkDragHandle>
+    <mat-icon [class.active-icon]="device.isActive">{{ device.icon }}</mat-icon>
+    <span class="device-name">{{ device.name }}</span>
+    <div class="header-actions">
+      <button mat-icon-button class="toggle-btn" (click)="onToggle($event)" [title]="device.isActive ? ('device.inactive' | translate) : ('device.active' | translate)">
+        <mat-icon [class.power-on]="device.isActive">{{ device.isActive ? 'power_settings_new' : 'power_off' }}</mat-icon>
+      </button>
+      <button mat-icon-button class="delete-btn" (click)="onDelete($event)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  
+  <div class="device-status" [class.active]="device.isActive">
+    <span *ngIf="device.currentValue !== undefined" class="value">
+      {{ device.currentValue }}
+    </span>
+    <span class="status-text">{{ device.isActive ? ('device.active' | translate) : ('device.inactive' | translate) }}</span>
+  </div>
+
+  <!-- Animation for active devices -->
+  <div *ngIf="device.isActive" class="pulse-ring"></div>
+</div>

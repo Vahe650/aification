@@ -1,0 +1,23 @@
+<div class="workspace">
+  <div class="workspace-header">
+    <h2>{{ 'workspace.title' | translate }}</h2>
+    <p>{{ 'workspace.hint' | translate }}</p>
+  </div>
+
+  <div #workspaceContent class="workspace-content" cdkDropList (drop)="onWorkspaceDrop($event)" (dragover)="onWorkspaceDragOver($event)">
+    <app-device-card
+      *ngFor="let device of devices$ | async"
+      [device]="device"
+      (click)="onDeviceClick(device)"
+      (delete)="onDeviceDelete(device)"
+      (toggle)="onDeviceToggle(device)"
+      (positionChange)="onDevicePositionChange(device, $event)"
+    ></app-device-card>
+
+    <div *ngIf="(devices$ | async)?.length === 0" class="empty-workspace">
+      <mat-icon>inbox</mat-icon>
+      <p>{{ 'workspace.empty' | translate }}</p>
+      <p class="hint">{{ 'workspace.empty_hint' | translate }}</p>
+    </div>
+  </div>
+</div>

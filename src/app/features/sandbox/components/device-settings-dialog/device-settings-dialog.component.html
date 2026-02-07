@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>{{ 'device.settings' | translate }}</h2>
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{ 'device.name' | translate }}</mat-label>
+      <input matInput formControlName="name" required>
+    </mat-form-field>
+
+    <div *ngIf="device.threshold.triggerValue !== undefined" class="threshold-group">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'device.threshold' | translate }}</mat-label>
+        <input matInput type="number" formControlName="triggerValue">
+        <mat-hint>{{ 'device.threshold_hint' | translate }}</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="device.threshold.min !== undefined || device.threshold.max !== undefined" class="threshold-group">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>{{ 'device.min_value' | translate }}</mat-label>
+        <input matInput type="number" formControlName="minValue">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>{{ 'device.max_value' | translate }}</mat-label>
+        <input matInput type="number" formControlName="maxValue">
+      </mat-form-field>
+    </div>
+
+    <!-- Поля для двигателя (ENGINE) -->
+    <div *ngIf="isEngine()" class="threshold-group">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'device.voltage' | translate }}</mat-label>
+        <mat-select formControlName="voltage">
+          <mat-option [value]="Voltage.V12">{{ 'device.voltage_12v' | translate }}</mat-option>
+          <mat-option [value]="Voltage.V220">{{ 'device.voltage_220v' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'device.speed' | translate }}</mat-label>
+        <input matInput type="number" formControlName="speed" min="0" max="100">
+        <mat-hint>{{ 'device.speed_range' | translate }}: 0-100%</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'device.current' | translate }}</mat-label>
+        <input matInput type="number" formControlName="current" [min]="0" [max]="isVoltage12V() ? 5 : null" step="0.1">
+        <mat-hint *ngIf="isVoltage12V()">Максимальный ток: до 5А</mat-hint>
+        <mat-hint *ngIf="!isVoltage12V()">Ток (А)</mat-hint>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">{{ 'button.cancel' | translate }}</button>
+  <button mat-button color="primary" (click)="onSave()" [disabled]="!form.valid">{{ 'button.save' | translate }}</button>
+</mat-dialog-actions>

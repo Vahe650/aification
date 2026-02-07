@@ -1,0 +1,30 @@
+<mat-card class="template-selector-card">
+  <mat-card-header>
+      <mat-card-title>
+        <mat-icon>folder</mat-icon>
+        {{ 'panel.templates' | translate }}
+      </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="template-list">
+      <div
+        *ngFor="let template of templates"
+        class="template-item"
+        (click)="loadTemplate(template)"
+      >
+        <div class="template-info">
+          <h3>{{ template.name }}</h3>
+          <p>{{ template.description }}</p>
+          <div class="template-devices">
+            <div class="chip-container">
+              <mat-chip *ngFor="let device of template.devices">
+                {{ device.name }}
+              </mat-chip>
+            </div>
+          </div>
+        </div>
+        <mat-icon class="load-icon">play_arrow</mat-icon>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

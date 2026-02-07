@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="ru" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="device.fan" datatype="html">
+        <source>Вентилятор</source>
+        <target>Вентилятор</target>
+      </trans-unit>
+      <trans-unit id="device.light_sensor" datatype="html">
+        <source>Датчик света</source>
+        <target>Датчик света</target>
+      </trans-unit>
+      <trans-unit id="device.smoke_sensor" datatype="html">
+        <source>Датчик дыма/CO2</source>
+        <target>Датчик дыма/CO2</target>
+      </trans-unit>
+      <trans-unit id="device.pump" datatype="html">
+        <source>Помпа</source>
+        <target>Помпа</target>
+      </trans-unit>
+      <trans-unit id="device.burner" datatype="html">
+        <source>Горелка</source>
+        <target>Горелка</target>
+      </trans-unit>
+      <trans-unit id="device.ultrasonic_sensor" datatype="html">
+        <source>Ультразвуковой датчик</source>
+        <target>Ультразвуковой датчик</target>
+      </trans-unit>
+      <trans-unit id="device.lamp" datatype="html">
+        <source>Лампа</source>
+        <target>Лампа</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

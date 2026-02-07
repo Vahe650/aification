@@ -1,0 +1,38 @@
+<mat-card class="simulation-panel-card">
+  <mat-card-header>
+      <mat-card-title>
+        <mat-icon>play_circle</mat-icon>
+        {{ 'panel.simulation' | translate }}
+      </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="simulation-controls" *ngIf="(devices$ | async)?.length as deviceCount">
+      <div *ngIf="deviceCount === 0" class="no-devices">
+        <p>{{ 'simulation.add_devices' | translate }}</p>
+      </div>
+
+      <div *ngFor="let device of devices$ | async" class="simulation-item">
+        <div class="device-info">
+          <mat-icon>{{ device.icon }}</mat-icon>
+          <span>{{ device.name }}</span>
+        </div>
+        <mat-slider
+          [min]="getDeviceRange(device).min"
+          [max]="getDeviceRange(device).max"
+          discrete
+          [showTickMarks]="true"
+          class="simulation-slider"
+        >
+          <input 
+            matSliderThumb 
+            [value]="simulationValues[device.id] || 0"
+            (valueChange)="onValueChange(device.id, $event)"
+          >
+        </mat-slider>
+        <div class="value-display">
+          {{ simulationValues[device.id] || 0 }}
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

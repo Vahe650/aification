@@ -1,0 +1,63 @@
+.simulation-panel-card {
+  margin: 16px;
+  margin-bottom: 0;
+
+  mat-card-header {
+    margin-bottom: 16px;
+
+    mat-card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.simulation-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.no-devices {
+  text-align: center;
+  padding: 24px;
+  color: #999;
+
+  p {
+    margin: 0;
+  }
+}
+
+.simulation-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.device-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 0.9rem;
+
+  mat-icon {
+    color: #3f51b5;
+  }
+}
+
+.simulation-slider {
+  width: 100%;
+}
+
+.value-display {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #3f51b5;
+}

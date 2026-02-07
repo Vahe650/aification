@@ -1,0 +1,27 @@
+<div class="sandbox-container">
+  <mat-toolbar color="primary" class="toolbar">
+    <span class="toolbar-title">IoT Sandbox - SmartConfig Studio</span>
+    <span class="spacer"></span>
+    <mat-menu #langMenu="matMenu">
+      <button mat-menu-item (click)="onLanguageChange('ru')">{{ 'language.ru' | translate }}</button>
+      <button mat-menu-item (click)="onLanguageChange('en')">{{ 'language.en' | translate }}</button>
+      <button mat-menu-item (click)="onLanguageChange('hy')">{{ 'language.hy' | translate }}</button>
+    </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="langMenu">
+      <mat-icon>language</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div class="sandbox-content">
+    <div class="sidebar">
+      <app-device-panel></app-device-panel>
+      <app-template-selector></app-template-selector>
+      <app-simulation-panel></app-simulation-panel>
+    </div>
+
+    <div class="main-area">
+      <app-workspace></app-workspace>
+      <app-config-form></app-config-form>
+    </div>
+  </div>
+</div>
