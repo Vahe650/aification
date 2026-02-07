@@ -1,42 +1,95 @@
-<mat-card class="config-form-card">
-  <mat-card-header>
+<div class="config-form-container">
+  <mat-card class="config-form-card">
+    <mat-card-header>
       <mat-card-title>
         <mat-icon>settings</mat-icon>
         {{ 'config.title' | translate }}
       </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form [formGroup]="form">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>{{ 'config.name' | translate }}</mat-label>
-        <input matInput formControlName="name" required>
-      </mat-form-field>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'config.name' | translate }}</mat-label>
+          <input matInput formControlName="name" required>
+        </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>{{ 'config.description' | translate }}</mat-label>
-        <textarea matInput formControlName="description" rows="4"></textarea>
-        <mat-hint>{{ 'config.description_hint' | translate }}</mat-hint>
-      </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'config.description' | translate }}</mat-label>
+          <textarea matInput formControlName="description" rows="3"></textarea>
+          <mat-hint>{{ 'config.description_hint' | translate }}</mat-hint>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="warn" (click)="onReset()">
+        <mat-icon>refresh</mat-icon>
+        {{ 'button.reset' | translate }}
+      </button>
+      <span class="spacer"></span>
+      <button mat-button (click)="onSave()" [disabled]="!form.valid">
+        <mat-icon>save</mat-icon>
+        {{ 'button.save' | translate }}
+      </button>
+      <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!form.valid || isSubmitting">
+        <mat-icon>send</mat-icon>
+        {{ isSubmitting ? ('config.submitting' | translate) : ('button.submit' | translate) }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
 
-      <div class="device-count">
-        <mat-icon>devices</mat-icon>
-        <span>{{ 'config.device_count' | translate }}: {{ (devices$ | async)?.length || 0 }}</span>
+  <div class="device-list-section">
+    <div class="device-list-header">
+      <mat-icon>devices</mat-icon>
+      <span>{{ 'config.device_count' | translate }} ({{ (devices$ | async)?.length || 0 }})</span>
+    </div>
+
+    <div class="device-list" *ngIf="(devices$ | async)?.length; else emptyDevices">
+      <div class="device-item" *ngFor="let device of devices$ | async" [class.active]="device.isActive">
+        <div class="device-item-header">
+          <mat-icon class="device-icon">{{ device.icon }}</mat-icon>
+          <span class="device-name">{{ device.name }}</span>
+          <span class="device-status" [class.active]="device.isActive">
+            {{ device.isActive ? ('device.active' | translate) : ('device.inactive' | translate) }}
+          </span>
+        </div>
+        <div class="device-attributes">
+          <div class="attribute" *ngIf="device.threshold.triggerValue !== undefined">
+            <span class="attr-label">{{ 'device.threshold' | translate }}:</span>
+            <span class="attr-value">{{ device.threshold.triggerValue }}</span>
+          </div>
+          <div class="attribute" *ngIf="device.threshold.min !== undefined">
+            <span class="attr-label">{{ 'device.min_value' | translate }}:</span>
+            <span class="attr-value">{{ device.threshold.min }}</span>
+          </div>
+          <div class="attribute" *ngIf="device.threshold.max !== undefined">
+            <span class="attr-label">{{ 'device.max_value' | translate }}:</span>
+            <span class="attr-value">{{ device.threshold.max }}</span>
+          </div>
+          <div class="attribute" *ngIf="device.threshold.speed !== undefined">
+            <span class="attr-label">{{ 'device.speed' | translate }}:</span>
+            <span class="attr-value">{{ device.threshold.speed }}%</span>
+          </div>
+          <div class="attribute" *ngIf="device.threshold.voltage !== undefined">
+            <span class="attr-label">{{ 'device.voltage' | translate }}:</span>
+            <span class="attr-value">{{ device.threshold.voltage }}V</span>
+          </div>
+          <div class="attribute" *ngIf="device.threshold.current !== undefined">
+            <span class="attr-label">{{ 'device.current' | translate }}:</span>
+            <span class="attr-value">{{ device.threshold.current }}A</span>
+          </div>
+          <div class="attribute" *ngIf="device.currentValue !== undefined">
+            <span class="attr-label">{{ 'simulation.value' | translate }}:</span>
+            <span class="attr-value current">{{ device.currentValue }}</span>
+          </div>
+        </div>
       </div>
-    </form>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button color="warn" (click)="onReset()">
-      <mat-icon>refresh</mat-icon>
-      {{ 'button.reset' | translate }}
-    </button>
-    <span class="spacer"></span>
-    <button mat-button (click)="onSave()" [disabled]="!form.valid">
-      <mat-icon>save</mat-icon>
-      {{ 'button.save' | translate }}
-    </button>
-    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!form.valid || isSubmitting">
-      <mat-icon>send</mat-icon>
-      {{ isSubmitting ? ('config.submitting' | translate) : ('button.submit' | translate) }}
-    </button>
-  </mat-card-actions>
-</mat-card>
+    </div>
+
+    <ng-template #emptyDevices>
+      <div class="empty-devices">
+        <mat-icon>inbox</mat-icon>
+        <span>{{ 'workspace.empty' | translate }}</span>
+      </div>
+    </ng-template>
+  </div>
+</div>

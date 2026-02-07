@@ -10,7 +10,7 @@
       <div
         *ngFor="let template of deviceTemplates"
         class="device-item"
-        [draggable]="true"
+        [draggable]="(canAddDevice(template) | async)"
         (dragstart)="onDeviceDragStart($event, template)"
         [class.disabled]="!(canAddDevice(template) | async)"
       >

@@ -8,6 +8,7 @@ import * as DeviceActions from '../../../../core/store/device/device.actions';
 import { selectDevices } from '../../../../core/store/device/device.selectors';
 import { DeviceSettingsDialogComponent } from '../device-settings-dialog/device-settings-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { I18nService } from '../../../../core/services/i18n.service';
 import { DeviceService } from '../../../../core/services/device.service';
 
@@ -24,6 +25,7 @@ export class WorkspaceComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private dialog: MatDialog,
+    private snackBar: MatSnackBar,
     private i18nService: I18nService,
     private deviceService: DeviceService
   ) {
@@ -47,6 +49,16 @@ export class WorkspaceComponent implements OnInit {
     this.devices$.pipe(take(1)).subscribe(devices => {
       const typeCount = devices.filter(d => d.type === deviceType).length;
       const deviceName = this.i18nService.translate(`device.${deviceType}`);
+
+      // Check if device limit is exceeded
+      if (template.maxCount < 999 && typeCount >= template.maxCount) {
+        this.snackBar.open(
+          `${deviceName}: limit ${template.maxCount} reached`,
+          'OK',
+          { duration: 3000 }
+        );
+        return;
+      }
 
       // Calculate position based on total device count (grid layout)
       const position = this.deviceService.calculateGridPosition(devices.length);
