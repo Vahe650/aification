@@ -11,15 +11,32 @@ import { Device, DeviceType, Voltage } from '../../../../core/models/device.mode
 export class DeviceSettingsDialogComponent {
   form: FormGroup;
   device: Device;
+  allDevices: Device[];
+  sensors: Device[];
+  devices: Device[];
+  isSensor: boolean;
+
+  private sensorTypes: DeviceType[] = [
+    DeviceType.LIGHT_SENSOR,
+    DeviceType.SMOKE_SENSOR,
+    DeviceType.ULTRASONIC_SENSOR
+  ];
 
   Voltage = Voltage;
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<DeviceSettingsDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { device: Device }
+    @Inject(MAT_DIALOG_DATA) public data: { device: Device; allDevices: Device[] }
   ) {
     this.device = data.device;
+    this.allDevices = data.allDevices || [];
+    this.isSensor = this.sensorTypes.includes(this.device.type);
+
+    // Sensors can affect devices, Devices can depend on sensors
+    this.sensors = this.allDevices.filter(d => this.sensorTypes.includes(d.type) && d.id !== this.device.id);
+    this.devices = this.allDevices.filter(d => !this.sensorTypes.includes(d.type) && d.id !== this.device.id);
+
     this.form = this.fb.group({
       name: [this.device.name, Validators.required],
       triggerValue: [this.device.threshold.triggerValue || null],
@@ -27,7 +44,9 @@ export class DeviceSettingsDialogComponent {
       maxValue: [this.device.threshold.max || null],
       speed: [this.device.threshold.speed || null],
       voltage: [this.device.threshold.voltage || Voltage.V12],
-      current: [this.device.threshold.current || null]
+      current: [this.device.threshold.current || null],
+      dependsOn: [this.device.dependsOn || []],
+      affects: [this.device.affects || []]
     });
 
     // Автоматически обновляем ограничения тока при изменении вольтажа
@@ -58,7 +77,9 @@ export class DeviceSettingsDialogComponent {
           speed: formValue.speed,
           voltage: formValue.voltage,
           current: formValue.current
-        }
+        },
+        dependsOn: formValue.dependsOn,
+        affects: formValue.affects
       };
       this.dialogRef.close(updatedDevice);
     }

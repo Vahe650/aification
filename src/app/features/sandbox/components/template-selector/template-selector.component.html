@@ -8,7 +8,7 @@
   <mat-card-content>
     <div class="template-list">
       <div
-        *ngFor="let template of templates"
+        *ngFor="let template of builtInTemplates"
         class="template-item"
         (click)="loadTemplate(template)"
       >
@@ -24,6 +24,36 @@
           </div>
         </div>
         <mat-icon class="load-icon">play_arrow</mat-icon>
+      </div>
+    </div>
+
+    <div class="custom-templates-section" *ngIf="customTemplates.length > 0">
+      <h4 class="section-title">
+        <mat-icon>bookmark</mat-icon>
+        {{ 'panel.custom_templates' | translate }}
+      </h4>
+      <div class="template-list">
+        <div
+          *ngFor="let template of customTemplates"
+          class="template-item custom"
+          (click)="loadTemplate(template)"
+        >
+          <div class="template-info">
+            <h3>{{ template.name }}</h3>
+            <p>{{ template.description }}</p>
+            <div class="template-devices">
+              <div class="chip-container">
+                <mat-chip *ngFor="let device of template.devices">
+                  {{ device.name }}
+                </mat-chip>
+              </div>
+            </div>
+          </div>
+          <button mat-icon-button color="warn" (click)="deleteTemplate(template, $event)" class="delete-btn">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <mat-icon class="load-icon">play_arrow</mat-icon>
+        </div>
       </div>
     </div>
   </mat-card-content>

@@ -26,9 +26,9 @@
         {{ 'button.reset' | translate }}
       </button>
       <span class="spacer"></span>
-      <button mat-button (click)="onSave()" [disabled]="!form.valid">
-        <mat-icon>save</mat-icon>
-        {{ 'button.save' | translate }}
+      <button mat-button (click)="onSaveAsTemplate()" [disabled]="!form.valid">
+        <mat-icon>bookmark</mat-icon>
+        {{ 'button.save_template' | translate }}
       </button>
       <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!form.valid || isSubmitting">
         <mat-icon>send</mat-icon>

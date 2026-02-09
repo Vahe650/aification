@@ -6,21 +6,53 @@
       </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div class="device-list">
-      <div
-        *ngFor="let template of deviceTemplates"
-        class="device-item"
-        [draggable]="(canAddDevice(template) | async)"
-        (dragstart)="onDeviceDragStart($event, template)"
-        [class.disabled]="!(canAddDevice(template) | async)"
-      >
-        <mat-icon>{{ template.icon }}</mat-icon>
-        <span class="device-name">{{ getDeviceName(template.type) }}</span>
-        <ng-container *ngIf="devices$ | async as devices">
-          <span class="device-count">
-            ({{ getDeviceCount(devices, template.type) }}/{{ getMaxCountDisplay(template.maxCount) }})
-          </span>
-        </ng-container>
+    <!-- Sensors Group -->
+    <div class="device-group">
+      <div class="group-header">
+        <mat-icon>sensors</mat-icon>
+        <span>{{ 'panel.sensors' | translate }}</span>
+      </div>
+      <div class="device-list">
+        <div
+          *ngFor="let template of sensorTemplates"
+          class="device-item"
+          [draggable]="(canAddDevice(template) | async)"
+          (dragstart)="onDeviceDragStart($event, template)"
+          [class.disabled]="!(canAddDevice(template) | async)"
+        >
+          <mat-icon>{{ template.icon }}</mat-icon>
+          <span class="device-name">{{ getDeviceName(template.type) }}</span>
+          <ng-container *ngIf="devices$ | async as devices">
+            <span class="device-count">
+              ({{ getDeviceCount(devices, template.type) }}/{{ getMaxCountDisplay(template.maxCount) }})
+            </span>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <!-- Devices Group -->
+    <div class="device-group">
+      <div class="group-header">
+        <mat-icon>settings_input_component</mat-icon>
+        <span>{{ 'panel.devices' | translate }}</span>
+      </div>
+      <div class="device-list">
+        <div
+          *ngFor="let template of deviceTemplates"
+          class="device-item"
+          [draggable]="(canAddDevice(template) | async)"
+          (dragstart)="onDeviceDragStart($event, template)"
+          [class.disabled]="!(canAddDevice(template) | async)"
+        >
+          <mat-icon>{{ template.icon }}</mat-icon>
+          <span class="device-name">{{ getDeviceName(template.type) }}</span>
+          <ng-container *ngIf="devices$ | async as devices">
+            <span class="device-count">
+              ({{ getDeviceCount(devices, template.type) }}/{{ getMaxCountDisplay(template.maxCount) }})
+            </span>
+          </ng-container>
+        </div>
       </div>
     </div>
   </mat-card-content>

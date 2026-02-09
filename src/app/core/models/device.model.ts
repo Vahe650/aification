@@ -33,6 +33,8 @@ export interface Device {
   isActive: boolean;
   currentValue?: number;
   icon?: string;
+  dependsOn?: string[];
+  affects?: string[];
 }
 
 export interface DeviceTemplate {

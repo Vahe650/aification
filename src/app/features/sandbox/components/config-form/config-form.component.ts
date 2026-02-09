@@ -44,7 +44,7 @@ export class ConfigFormComponent implements OnInit, OnDestroy {
         this.form.patchValue({
           name: config.name,
           description: config.description
-        });
+        }, { emitEvent: false });
       }
     });
     this.subscriptions.push(configSub);
@@ -59,29 +59,6 @@ export class ConfigFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
-  }
-
-  onSave(): void {
-    if (this.form.valid) {
-      this.devices$.pipe(take(1)).subscribe(devices => {
-        const config: Configuration = {
-          id: `config-${Date.now()}`,
-          name: this.form.value.name,
-          description: this.form.value.description,
-          devices: devices,
-          createdAt: new Date(),
-          updatedAt: new Date()
-        };
-
-        const validation = this.configService.validateConfiguration(config);
-        if (validation.isValid) {
-          this.store.dispatch(ConfigActions.saveConfiguration({ config }));
-          this.snackBar.open('Конфигурация сохранена', 'Закрыть', { duration: 2000 });
-        } else {
-          this.snackBar.open(`Ошибка: ${validation.errors.join(', ')}`, 'Закрыть', { duration: 3000 });
-        }
-      });
-    }
   }
 
   onSubmit(): void {
@@ -99,6 +76,7 @@ export class ConfigFormComponent implements OnInit, OnDestroy {
 
         const validation = this.configService.validateConfiguration(config);
         if (validation.isValid) {
+          console.log('[Submit Order] Configuration JSON:', JSON.stringify(config, null, 2));
           this.configService.submitConfiguration(config).subscribe({
             next: (result) => {
               this.isSubmitting = false;
@@ -126,6 +104,25 @@ export class ConfigFormComponent implements OnInit, OnDestroy {
       this.store.dispatch(DeviceActions.resetDevices());
       this.form.reset();
       this.snackBar.open('Конфигурация сброшена', 'Закрыть', { duration: 2000 });
+    }
+  }
+
+  onSaveAsTemplate(): void {
+    if (this.form.valid) {
+      this.devices$.pipe(take(1)).subscribe(devices => {
+        if (devices.length === 0) {
+          this.snackBar.open('Добавьте хотя бы одно устройство', 'Закрыть', { duration: 3000 });
+          return;
+        }
+
+        const template = this.configService.saveAsTemplate(
+          this.form.value.name,
+          this.form.value.description,
+          devices
+        );
+
+        this.snackBar.open(`Шаблон "${template.name}" сохранён`, 'Закрыть', { duration: 2000 });
+      });
     }
   }
 }

@@ -83,15 +83,17 @@ export class WorkspaceComponent implements OnInit {
   }
 
   onDeviceClick(device: Device): void {
-    const dialogRef = this.dialog.open(DeviceSettingsDialogComponent, {
-      width: '500px',
-      data: { device }
-    });
+    this.devices$.pipe(take(1)).subscribe(allDevices => {
+      const dialogRef = this.dialog.open(DeviceSettingsDialogComponent, {
+        width: '500px',
+        data: { device, allDevices }
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.store.dispatch(DeviceActions.updateDevice({ device: result }));
-      }
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.store.dispatch(DeviceActions.updateDevice({ device: result }));
+        }
+      });
     });
   }
 

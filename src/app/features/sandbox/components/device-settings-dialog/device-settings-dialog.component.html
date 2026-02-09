@@ -49,6 +49,32 @@
         <mat-hint *ngIf="!isVoltage12V()">Ток (А)</mat-hint>
       </mat-form-field>
     </div>
+
+    <!-- Sensors: show Affects (devices) -->
+    <div class="threshold-group" *ngIf="isSensor && devices.length > 0">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'device.affects' | translate }}</mat-label>
+        <mat-select formControlName="affects" multiple>
+          <mat-option *ngFor="let d of devices" [value]="d.id">
+            {{ d.name }}
+          </mat-option>
+        </mat-select>
+        <mat-hint>{{ 'device.affects_hint' | translate }}</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <!-- Devices: show Depends On (sensors) -->
+    <div class="threshold-group" *ngIf="!isSensor && sensors.length > 0">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'device.depends_on' | translate }}</mat-label>
+        <mat-select formControlName="dependsOn" multiple>
+          <mat-option *ngFor="let s of sensors" [value]="s.id">
+            {{ s.name }}
+          </mat-option>
+        </mat-select>
+        <mat-hint>{{ 'device.depends_on_hint' | translate }}</mat-hint>
+      </mat-form-field>
+    </div>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

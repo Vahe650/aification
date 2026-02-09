@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of, Subject, throwError } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { Configuration } from '../models/config.model';
+import { Configuration, ConfigurationTemplate } from '../models/config.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigService {
   private readonly STORAGE_KEY = 'iot_sandbox_config';
+  private readonly TEMPLATES_KEY = 'iot_sandbox_custom_templates';
   private readonly API_URL = '/api/configurations'; // Replace with actual API URL
+
+  private templatesUpdated$ = new Subject<void>();
+  templatesChanged$ = this.templatesUpdated$.asObservable();
 
   loadConfiguration(): Observable<Configuration | null> {
     const stored = localStorage.getItem(this.STORAGE_KEY);
@@ -71,5 +75,48 @@ export class ConfigService {
       isValid: errors.length === 0,
       errors
     };
+  }
+
+  getCustomTemplates(): ConfigurationTemplate[] {
+    const stored = localStorage.getItem(this.TEMPLATES_KEY);
+    if (stored) {
+      try {
+        return JSON.parse(stored);
+      } catch (e) {
+        return [];
+      }
+    }
+    return [];
+  }
+
+  saveAsTemplate(name: string, description: string, devices: any[]): ConfigurationTemplate {
+    const template: ConfigurationTemplate = {
+      id: `custom-${Date.now()}`,
+      name,
+      description,
+      devices: devices.map(d => ({
+        type: d.type,
+        name: d.name,
+        threshold: d.threshold,
+        dependsOn: d.dependsOn,
+        affects: d.affects
+      }))
+    };
+
+    const templates = this.getCustomTemplates();
+    templates.push(template);
+    localStorage.setItem(this.TEMPLATES_KEY, JSON.stringify(templates));
+
+    console.log('[Save as Template] Template JSON:', JSON.stringify(template, null, 2));
+
+    this.templatesUpdated$.next();
+
+    return template;
+  }
+
+  deleteCustomTemplate(templateId: string): void {
+    const templates = this.getCustomTemplates().filter(t => t.id !== templateId);
+    localStorage.setItem(this.TEMPLATES_KEY, JSON.stringify(templates));
+    this.templatesUpdated$.next();
   }
 }

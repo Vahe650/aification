@@ -13,8 +13,16 @@ import { I18nService } from '../../../../core/services/i18n.service';
   styleUrls: ['./device-panel.component.scss']
 })
 export class DevicePanelComponent {
-  deviceTemplates = DEVICE_TEMPLATES;
   devices$: Observable<Device[]>;
+
+  sensorTypes: DeviceType[] = [
+    DeviceType.LIGHT_SENSOR,
+    DeviceType.SMOKE_SENSOR,
+    DeviceType.ULTRASONIC_SENSOR
+  ];
+
+  sensorTemplates = DEVICE_TEMPLATES.filter(t => this.sensorTypes.includes(t.type));
+  deviceTemplates = DEVICE_TEMPLATES.filter(t => !this.sensorTypes.includes(t.type));
 
   constructor(
     private store: Store<AppState>,
