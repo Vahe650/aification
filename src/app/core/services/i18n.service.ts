@@ -78,7 +78,14 @@ export class I18nService {
     // Languages
     'language.ru': { ru: 'Русский', en: 'Russian', hy: 'Russian' },
     'language.en': { ru: 'English', en: 'English', hy: 'English' },
-    'language.hy': { ru: 'Армянский', en: 'Armenian', hy: 'Armenian' }
+    'language.hy': { ru: 'Армянский', en: 'Armenian', hy: 'Armenian' },
+
+    // Auth
+    'auth.login': { ru: 'Войти', en: 'Login', hy: 'Login' },
+    'auth.logout': { ru: 'Выйти', en: 'Logout', hy: 'Logout' },
+    'auth.username': { ru: 'Имя пользователя', en: 'Username', hy: 'Username' },
+    'auth.password': { ru: 'Пароль', en: 'Password', hy: 'Password' },
+    'auth.login_subtitle': { ru: 'Вход в систему конфигурации', en: 'Sign in to configuration system', hy: 'Sign in to configuration system' }
   };
 
   getCurrentLanguage(): Observable<Language> {

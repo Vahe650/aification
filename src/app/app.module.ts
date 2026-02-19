@@ -11,7 +11,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { SandboxModule } from './features/sandbox/sandbox.module';
 import { appReducer } from './core/store/app.reducer';
 import { DeviceEffects } from './core/store/device/device.effects';
 import { ConfigEffects } from './core/store/config/config.effects';
@@ -27,7 +26,6 @@ import { ConfigEffects } from './core/store/config/config.effects';
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    SandboxModule,
     DragDropModule,
     StoreModule.forRoot(appReducer),
     EffectsModule.forRoot([DeviceEffects, ConfigEffects]),
