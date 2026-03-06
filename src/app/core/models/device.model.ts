@@ -7,7 +7,16 @@ export enum DeviceType {
   ULTRASONIC_SENSOR = 'ultrasonic_sensor',
   LAMP = 'lamp',
   ENGINE = 'engine',
-  CONTACTOR = 'contactor'
+  CONTACTOR = 'contactor',
+  // Climate station devices
+  THERMOSTAT = 'thermostat',
+  TEMPERATURE_SENSOR = 'temperature_sensor',
+  HUMIDITY_SENSOR = 'humidity_sensor',
+  SOIL_MOISTURE_SENSOR = 'soil_moisture_sensor',
+  IRRIGATION_CONTROLLER = 'irrigation_controller',
+  HEATER = 'heater',
+  HUMIDIFIER = 'humidifier',
+  GROW_LIGHT = 'grow_light'
 }
 
 export enum Voltage {
@@ -114,5 +123,62 @@ export const DEVICE_TEMPLATES: DeviceTemplate[] = [
     icon: 'settings_power',
     maxCount: 999,
     defaultThreshold: { triggerValue: 0 }
+  },
+  // Climate station devices
+  {
+    type: DeviceType.THERMOSTAT,
+    name: 'Термостат',
+    icon: 'device_thermostat',
+    maxCount: 4,
+    defaultThreshold: { min: 18, max: 26 }
+  },
+  {
+    type: DeviceType.TEMPERATURE_SENSOR,
+    name: 'Датчик температуры',
+    icon: 'thermostat',
+    maxCount: 999,
+    defaultThreshold: { min: -40, max: 80 }
+  },
+  {
+    type: DeviceType.HUMIDITY_SENSOR,
+    name: 'Датчик влажности воздуха',
+    icon: 'water',
+    maxCount: 999,
+    defaultThreshold: { min: 0, max: 100 }
+  },
+  {
+    type: DeviceType.SOIL_MOISTURE_SENSOR,
+    name: 'Датчик влажности почвы',
+    icon: 'grass',
+    maxCount: 999,
+    defaultThreshold: { min: 0, max: 100 }
+  },
+  {
+    type: DeviceType.IRRIGATION_CONTROLLER,
+    name: 'Контроллер полива',
+    icon: 'valve',
+    maxCount: 8,
+    defaultThreshold: { triggerValue: 30 }
+  },
+  {
+    type: DeviceType.HEATER,
+    name: 'Обогреватель',
+    icon: 'heat',
+    maxCount: 4,
+    defaultThreshold: { triggerValue: 18 }
+  },
+  {
+    type: DeviceType.HUMIDIFIER,
+    name: 'Увлажнитель',
+    icon: 'humidity_high',
+    maxCount: 4,
+    defaultThreshold: { triggerValue: 40 }
+  },
+  {
+    type: DeviceType.GROW_LIGHT,
+    name: 'Фитолампа',
+    icon: 'fluorescent',
+    maxCount: 999,
+    defaultThreshold: { min: 6, max: 18 }
   }
 ];

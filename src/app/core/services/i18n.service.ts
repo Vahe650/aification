@@ -19,6 +19,15 @@ export class I18nService {
     'device.lamp': { ru: 'Лампа', en: 'Lamp', hy: 'Lamp' },
     'device.engine': { ru: 'Двигатель', en: 'Engine', hy: 'Engine' },
     'device.contactor': { ru: 'Контактор', en: 'Contactor', hy: 'Contactor' },
+    // Climate station devices
+    'device.thermostat': { ru: 'Термостат', en: 'Thermostat', hy: 'Thermostat' },
+    'device.temperature_sensor': { ru: 'Датчик температуры', en: 'Temperature Sensor', hy: 'Temperature Sensor' },
+    'device.humidity_sensor': { ru: 'Датчик влажности воздуха', en: 'Humidity Sensor', hy: 'Humidity Sensor' },
+    'device.soil_moisture_sensor': { ru: 'Датчик влажности почвы', en: 'Soil Moisture Sensor', hy: 'Soil Moisture Sensor' },
+    'device.irrigation_controller': { ru: 'Контроллер полива', en: 'Irrigation Controller', hy: 'Irrigation Controller' },
+    'device.heater': { ru: 'Обогреватель', en: 'Heater', hy: 'Heater' },
+    'device.humidifier': { ru: 'Увлажнитель', en: 'Humidifier', hy: 'Humidifier' },
+    'device.grow_light': { ru: 'Фитолампа', en: 'Grow Light', hy: 'Grow Light' },
 
     // Device states
     'device.active': { ru: 'Активен', en: 'Active', hy: 'Active' },

@@ -1,114 +1,136 @@
 <header>
   <a href="#" class="logo">Smart<span>Agro</span></a>
   <nav>
-    <a href="#home">Главная</a>
-    <a href="#features">Возможности</a>
     <a href="#advantages">Преимущества</a>
+    <a href="#how-it-works">Как начать</a>
     <a href="#contact">Контакты</a>
     <a routerLink="/login" class="btn-configurator">Конфигуратор</a>
   </nav>
   <div class="phone">+7 (900) 000-00-00</div>
 </header>
 
-<section id="home" class="hero">
-  <div class="hero-text">
-    <span class="tag-esp">На базе контроллера ESP32</span>
-    <h1>Автоматизация теплиц: Профессиональное управление по цене DIY-проекта</h1>
-    <p>Удаленный мониторинг климата, управление освещением и отоплением до 2 кВт. Сократите ручной труд на 40% с помощью гибкой модульной системы на базе облачного сервера.</p>
-    <a href="#contact" class="btn-primary">Получить расчет экономии</a>
-  </div>
-  <div class="hero-image">
-    <img src="https://teplicy-info.ru/wp-content/uploads/2023/02/Avtomatiz-1-min.jpg" alt="Автоматизация теплиц">
-  </div>
-</section>
-
-<div class="stats-grid">
-  <div class="stat-card"><h2>-40%</h2><p>Ручного труда</p></div>
-  <div class="stat-card"><h2>30%</h2><p>Экономии ресурсов</p></div>
-  <div class="stat-card"><h2>1 сезон</h2><p>Окупаемость</p></div>
-</div>
-
-<section id="features" class="features">
-  <div class="features-header">
-    <h2>Что умеет SmartAgro</h2>
-    <p>Универсальное решение для контроля всех жизненно важных процессов в теплице</p>
-  </div>
-  <div class="feature-grid">
-    <div class="feature-item">
-      <img src="https://kolecs.lviv.ua/wp-content/uploads/2020/07/%D0%BC%D0%BE%D0%B6%D0%BB%D0%B8%D0%B2%D0%BE%D1%81%D1%82%D1%96-%D1%80%D0%BE%D0%B7%D1%83%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE-%D0%B1%D1%83%D0%B4%D0%B8%D0%BD%D0%BA%D1%83.jpg" alt="Датчики климата">
-      <div class="feature-content">
-        <h3>Контроль климата</h3>
-        <ul>
-          <li>Мониторинг темп. и влажности воздуха</li>
-          <li>Управление отоплением (до 2 кВт)</li>
-          <li>Контроль вентиляции и горелок</li>
-          <li>Точное PWM-регулирование</li>
-        </ul>
-      </div>
-    </div>
-    <div class="feature-item">
-      <img src="https://testslab.ru/upload/image/osveshenosti/4.jpg" alt="Управление освещением">
-      <div class="feature-content">
-        <h3>Освещение и уровни</h3>
-        <ul>
-          <li>Контроль уровня освещенности</li>
-          <li>Автоматическое управление светом</li>
-          <li>Ультразвуковой мониторинг уровней</li>
-          <li>Работа по расписанию 24/7</li>
-        </ul>
-      </div>
-    </div>
-    <div class="feature-item">
-      <img src="https://express-agro.ru/wp-content/uploads/2020/11/klimat.jpg" alt="Микроконтроллер и облако">
-      <div class="feature-content">
-        <h3>Удаленный доступ</h3>
-        <ul>
-          <li>База на мощном ESP32</li>
-          <li>Мобильное приложение для iOS/Android</li>
-          <li>Гибкая настройка через облачный сервер</li>
-          <li>История и аналитика данных</li>
-        </ul>
-      </div>
-    </div>
+<!-- 1. Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Автоматизация теплиц</h1>
+    <p class="hero-subtitle">
+      Готовый комплект для автоматического управления теплицей.<br>
+      Подключается по инструкции и работает автономно.
+    </p>
+    <p class="hero-features">
+      Управляет поливом, вентиляцией, отоплением и освещением.
+    </p>
+    <a href="#contact" class="btn-primary">Оставить заявку</a>
   </div>
 </section>
 
+<!-- 2. Преимущества -->
 <section id="advantages" class="advantages">
-  <h2>Наши преимущества</h2>
-  <div class="adv-grid">
-    <div class="adv-item">
-      <h4>Низкая стоимость</h4>
-      <p>Наша система значительно дешевле аналогов благодаря оптимизированной архитектуре на ESP32 и собственным программным решениям.</p>
+  <h2>Преимущества</h2>
+  <div class="advantages-grid">
+    <div class="advantage-card">
+      <span class="material-icons">autorenew</span>
+      <h3>Автоматическая работа</h3>
+      <p>Система поддерживает заданные параметры без ручного управления.</p>
     </div>
-    <div class="adv-item">
-      <h4>Гибкость настройки</h4>
-      <p>Все параметры — от порогов срабатывания реле до графиков освещения — настраиваются через удобный веб-интерфейс облака.</p>
+    <div class="advantage-card">
+      <span class="material-icons">build</span>
+      <h3>Самостоятельная установка</h3>
+      <p>Комплект подключается по инструкции.</p>
     </div>
-    <div class="adv-item">
-      <h4>Модульная архитектура</h4>
-      <p>Систему легко расширить: добавляйте новые датчики или исполнительные механизмы без замены основного контроллера.</p>
+    <div class="advantage-card">
+      <span class="material-icons">tune</span>
+      <h3>Гибкая настройка</h3>
+      <p>Параметры работы задаются пользователем.</p>
+    </div>
+    <div class="advantage-card">
+      <span class="material-icons">wifi_off</span>
+      <h3>Локальная работа</h3>
+      <p>Теплица продолжает работать даже при отсутствии интернета.</p>
     </div>
   </div>
 </section>
 
-<section id="contact">
-  <div class="form-container">
-    <h2>Оставьте заявку</h2>
-    <form>
-      <input type="text" placeholder="Ваше имя" required>
-      <input type="tel" placeholder="Телефон" required>
-      <select>
-        <option>Тепличное хозяйство</option>
-        <option>Животноводство</option>
-        <option>Открытый грунт</option>
-        <option>Другое</option>
-      </select>
-      <textarea rows="4" placeholder="Ваш вопрос"></textarea>
-      <button type="submit" class="btn-send">Отправить заявку</button>
-    </form>
+<!-- 3. Как начать -->
+<section id="how-it-works" class="how-it-works">
+  <h2>Как начать</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3>Купите базовый комплект</h3>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3>Подключите оборудование по инструкции</h3>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3>Настройте параметры работы</h3>
+    </div>
+    <div class="step">
+      <div class="step-number">4</div>
+      <h3>Система автоматически управляет теплицей</h3>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Особенности работы системы -->
+<section class="offline-section">
+  <div class="offline-content">
+    <span class="material-icons offline-icon">wifi_off</span>
+    <h2>Работает без интернета</h2>
+    <p class="offline-main">Система управляет теплицей локально.</p>
+    <div class="offline-details">
+      <p>Интернет используется для:</p>
+      <ul>
+        <li>телеметрии</li>
+        <li>уведомлений</li>
+        <li>удалённого управления</li>
+        <li>хранения истории данных</li>
+      </ul>
+      <p class="offline-note">Если интернет пропадает — автоматика продолжает работать.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. CTA -->
+<section class="cta-section">
+  <h2>Готовы автоматизировать теплицу?</h2>
+  <p>Оставьте заявку и мы поможем подобрать комплект</p>
+  <a href="#contact" class="btn-primary">Получить консультацию</a>
+</section>
+
+<!-- 6. Контакты -->
+<section id="contact" class="contact-section">
+  <div class="contact-wrapper">
+    <div class="contact-form">
+      <h2>Оставьте заявку</h2>
+      <form>
+        <input type="text" placeholder="Ваше имя" required>
+        <input type="tel" placeholder="Телефон" required>
+        <input type="email" placeholder="Email">
+        <textarea rows="3" placeholder="Комментарий (необязательно)"></textarea>
+        <button type="submit" class="btn-submit">Отправить заявку</button>
+      </form>
+    </div>
+    <div class="contact-info">
+      <h3>Контакты</h3>
+      <div class="contact-item">
+        <span class="material-icons">phone</span>
+        <span>+7 (900) 000-00-00</span>
+      </div>
+      <div class="contact-item">
+        <span class="material-icons">email</span>
+        <span>info@smartagro.ru</span>
+      </div>
+      <div class="contact-item">
+        <span class="material-icons">chat</span>
+        <span>Telegram: @smartagro</span>
+      </div>
+    </div>
   </div>
 </section>
 
 <footer>
-  © 2024 SmartAgro Systems. Технологии на базе ESP32, которые работают на земле.
+  © 2024 SmartAgro. Автоматизация теплиц.
 </footer>
